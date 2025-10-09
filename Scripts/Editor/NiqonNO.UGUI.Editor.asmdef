@@ -1,0 +1,16 @@
+{
+    "name": "NiqonNO.UGUI.Editor",
+    "rootNamespace": "NiqonNO.UGUI.Editor",
+    "references": [
+        "GUID:8d5c9111f42bcd344ba2f9467a29563b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,15 @@
+{
+  "name": "com.niqonno.ui-ugui",
+  "version": "1.0.0",
+  "displayName": "NiqonNO UI uGUI",
+  "description": "UI utilities for uGUI",
+  "unity": "6000.0.58f2",
+  "author": {
+    "name": "NiqonNO",
+    "email": "Niqon.NO@gmail.com",
+    "url": ""
+  },
+  "dependencies": {
+    "com.niqonno.core": "https://github.com/NiqonNO/Core.git#1.3.6"
+  }
+}
