@@ -13,7 +13,6 @@ namespace NiqonNO.UGUI
         IEndDragHandler, IDragHandler, IScrollHandler, ICanvasElement
     {
         protected readonly AutoScrollState AutoScroll = new AutoScrollState();
-        static readonly EasingFunction DefaultEasingFunction = NOEasing.Get(Ease.OutCubic);
         
         [SerializeField, NORequireInterface(typeof(INODataCollection))]
         private Object _ItemData;
@@ -101,7 +100,7 @@ namespace NiqonNO.UGUI
             Enable = true,
             VelocityThreshold = 0.5f,
             Duration = 0.3f,
-            Easing = Ease.InOutCubic
+            Easing = NOEase.InOutCubic
         };
         public bool SnapEnabled
         {
@@ -253,9 +252,8 @@ namespace NiqonNO.UGUI
         }
         
         public virtual void ScrollTo(float position, Action onComplete = null) => ScrollTo(position, Snap.Duration, Snap.Easing, onComplete);
-        public virtual void ScrollTo(float position, float duration, Action onComplete = null) => ScrollTo(position, duration, Ease.OutCubic, onComplete);
-        public virtual void ScrollTo(float position, float duration, Ease easing, Action onComplete = null) => ScrollTo(position, duration, NOEasing.Get(easing), onComplete);
-        public virtual void ScrollTo(float position, float duration, EasingFunction easingFunction, Action onComplete = null)
+        public virtual void ScrollTo(float position, float duration, Action onComplete = null) => ScrollTo(position, duration, NOEase.OutCubic, onComplete);
+        public virtual void ScrollTo(float position, float duration, NOEase easing, Action onComplete = null)
         {
             if (duration <= 0f)
             {
@@ -267,7 +265,7 @@ namespace NiqonNO.UGUI
             AutoScroll.Reset();
             AutoScroll.Enable = true;
             AutoScroll.Duration = duration;
-            AutoScroll.EasingFunction = easingFunction ?? DefaultEasingFunction;
+            AutoScroll.Easing = easing;
             AutoScroll.StartTime = Time.unscaledTime;
             AutoScroll.EndPosition = CurrentPosition + CalculateMovementAmount(CurrentPosition, position);
             AutoScroll.OnComplete = onComplete;
@@ -458,7 +456,7 @@ namespace NiqonNO.UGUI
                 var alpha = Mathf.Clamp01((Time.unscaledTime - AutoScroll.StartTime) /
                                           Mathf.Max(AutoScroll.Duration, float.Epsilon));
                 position = Mathf.LerpUnclamped(ScrollStartPosition, AutoScroll.EndPosition,
-                    AutoScroll.EasingFunction(alpha));
+                    AutoScroll.Easing.Ease(alpha));
 
                 if (Mathf.Approximately(alpha, 1f))
                 {
@@ -585,14 +583,14 @@ namespace NiqonNO.UGUI
             public bool Enable;
             public float VelocityThreshold;
             public float Duration;
-            public Ease Easing;
+            public NOEase Easing;
         }
         protected class AutoScrollState
         {
             public bool Enable;
             public bool Elastic;
             public float Duration;
-            public EasingFunction EasingFunction;
+            public NOEase Easing;
             public float StartTime;
             public float EndPosition;
 
@@ -604,7 +602,7 @@ namespace NiqonNO.UGUI
                 Elastic = false;
                 Duration = 0f;
                 StartTime = 0f;
-                EasingFunction = DefaultEasingFunction;
+                Easing = NOEase.Linear;
                 EndPosition = 0f;
                 OnComplete = null;
             }

@@ -187,10 +187,10 @@ namespace NiqonNO.UGUI
             }
         }
 
-        public override void ScrollTo(float position, float duration, EasingFunction easingFunction,
+        public override void ScrollTo(float position, float duration, NOEase easing,
             Action onComplete = null)
         {
-            base.ScrollTo(CenterOnPosition(position), duration, easingFunction, onComplete);
+            base.ScrollTo(CenterOnPosition(position), duration, easing, onComplete);
             UpdateSelection(Mathf.RoundToInt(position));
         }
 
