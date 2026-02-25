@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace NiqonNO.UGUI
@@ -11,8 +10,8 @@ namespace NiqonNO.UGUI
 	{
 		[SerializeField] [TextArea] private string LabelText;
 
-		[FormerlySerializedAs("SliderVariable")] [SerializeField]
-		private NOVector3Variable TernaryVariable;
+		[SerializeField]
+		private NOValue<Vector3> TernaryValue;
 
 		[SerializeField] [Range(0, 1)] private float StepSize = 0.1f;
 
@@ -49,7 +48,7 @@ namespace NiqonNO.UGUI
 		{
 			if (Ternary)
 			{
-				Ternary.SetValueWithoutNotify(TernaryVariable.Value);
+				Ternary.SetValueWithoutNotify(TernaryValue.Value);
 				UpdateValue(Ternary.Value);
 			}
 
@@ -58,7 +57,7 @@ namespace NiqonNO.UGUI
 
 		private void UpdateValue(Vector3 newValue)
 		{
-			TernaryVariable.Value = newValue;
+			TernaryValue.Value = newValue;
 			if (ValueLabel) ValueLabel.text = newValue.ToString();
 		}
 

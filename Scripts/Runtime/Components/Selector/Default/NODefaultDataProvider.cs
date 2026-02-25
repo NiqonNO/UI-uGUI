@@ -6,7 +6,7 @@ namespace NiqonNO.UGUI
     public class NODefaultDataProvider : NOScriptableObject, INODataProvider
     {
         [SerializeField] 
-        private NOStringValue _ItemName;
+        private NOValue<string> _ItemName;
         public string ItemName => _ItemName.Value;
         
         [SerializeField] 
@@ -14,7 +14,7 @@ namespace NiqonNO.UGUI
         public Sprite ItemIcon => _ItemIcon;
         
         [SerializeField] 
-        private NOColorValue _ItemColor;
+        private NOValue<Color> _ItemColor;
         public Color ItemColor => _ItemColor.Value;
     }
 }

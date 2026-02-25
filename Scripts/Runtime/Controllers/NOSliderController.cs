@@ -10,7 +10,7 @@ namespace NiqonNO.UGUI
 	{
 		[SerializeField] [TextArea] private string LabelText;
 
-		[SerializeField] private NOFloatVariable SliderVariable;
+		[SerializeField] private NOValue<float> SliderValue;
 
 		[SerializeField] [Range(0, 1)] private float StepSize = 0.1f;
 
@@ -43,7 +43,7 @@ namespace NiqonNO.UGUI
 		{
 			if (Slider)
 			{
-				Slider.SetValueWithoutNotify(SliderVariable.Value);
+				Slider.SetValueWithoutNotify(SliderValue.Value);
 				UpdateValue(Slider.Value);
 			}
 
@@ -52,7 +52,7 @@ namespace NiqonNO.UGUI
 
 		private void UpdateValue(float newValue)
 		{
-			SliderVariable.Value = newValue;
+			SliderValue.Value = newValue;
 			if (ValueLabel) ValueLabel.text = newValue.ToString();
 		}
 
